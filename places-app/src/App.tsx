@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { useState, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 
 type Place = {
@@ -14,13 +14,13 @@ type Place = {
 const App = () => {
   const [places, setPlaces] = useState<Place[] > ([]);
 
-  const getAllPlaces = async () => {
-    const data = await fetch(import.meta.env.VITE_SERVER_URL + "api/places");
-    const obj = await data.json();
-    setPlaces(obj);
-  };
 
   useEffect(() => {
+    const getAllPlaces = async () => {
+      const data = await fetch(import.meta.env.VITE_SERVER_URL + 'api/places');
+      const obj = await data.json();
+      setPlaces(obj);
+    };
     getAllPlaces();
   }, []);
 
@@ -28,12 +28,12 @@ const App = () => {
     <>
       <ul>
         {places.map(p => 
-        <li key = {p.ID}>
-          {p.Name} ({p.Latitude.toFixed(4)}, {p.Longitude.toFixed(4)});
-        </li>
+          <li key = {p.ID}>
+            {p.Name} ({p.Latitude.toFixed(4)}, {p.Longitude.toFixed(4)});
+          </li>
         )}
       </ul>
-      <MapContainer style={{height: "400px"}} center={[62.59, 29,77]} zoom={17}>
+      <MapContainer style={{height: '400px'}} center={[62.59, 29,77]} zoom={17}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
