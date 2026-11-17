@@ -20,3 +20,11 @@ Running the software:
     (npm run dev;) **Both folders separately**
 
 4. Copy the localhost URL that appears in the places-app terminal and paste it to your browser search bar
+
+Verifying, cleaning up and fixing the code:
+--------------------------
+1. Run ESlint (npm run lint)
+
+2. Fix minor issues (npm run lint:fix)
+
+3. Locate and identify major issues in terminal output. Example: "24:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders"
