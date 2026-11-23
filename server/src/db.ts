@@ -29,15 +29,21 @@ export async function editPlace(
   userId: number,
   latitude: number,
   longitude: number,
-) {
+): Promise<OkPacket> {
   const sql =
     "UPDATE `places` SET Name = ?, UserID = ?, Latitude = ?, Longitude = ? WHERE ID = ?";
-  return await sendQuery(sql, [name, userId, latitude, longitude, id]);
+  return await sendQuery<OkPacket>(sql, [
+    name,
+    userId,
+    latitude,
+    longitude,
+    id,
+  ]);
 }
 
-export async function deletePlace(id: number) {
+export async function deletePlace(id: number): Promise<OkPacket> {
   const sql = "DELETE FROM `places` WHERE `ID` = ?";
-  return await sendQuery<Place>(sql, [id]);
+  return await sendQuery<OkPacket>(sql, [id]);
 }
 
 export async function getPlacesByUserId(userId: any): Promise<Place[]> {
@@ -63,7 +69,7 @@ export async function getPlaceWithinDistance(
     FROM places
     HAVING distance < ${distance}
     `;
-  return await sendQuery<Place>(sql, [latitude, longitude, latitude]);
+  return await sendQuery<Place[]>(sql, [latitude, longitude, latitude]);
 }
 
 export async function getAllUsers(): Promise<User[]> {
@@ -83,7 +89,7 @@ export async function getUserByName(name: any): Promise<User> {
 
 export async function addUser(name: string, password: string) {
   const sql = "INSERT INTO `users` (`Name`, `Password`) VALUES (?, ?)";
-  return await sendQuery<User>(sql, [name, password]);
+  return await sendQuery<OkPacket>(sql, [name, password]);
 }
 
 let pool: maria.Pool | undefined;
@@ -101,7 +107,7 @@ export function getPool(): maria.Pool {
   return pool;
 }
 
-async function sendQuery<T>(sql: string, params?: any[]): Promise<T[]> {
+async function sendQuery<T>(sql: string, params?: any[]): Promise<T> {
   let connection: maria.PoolConnection | null = null;
 
   try {

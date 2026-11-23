@@ -33,7 +33,7 @@ const App = () => {
           </li>
         )}
       </ul>
-      <MapContainer style={{height: '400px'}} center={[62.59, 29,77]} zoom={17}>
+      <MapContainer style={{height: '400px'}} center={[62.5992, 29.7701]} zoom={17}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
