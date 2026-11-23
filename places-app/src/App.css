@@ -19,3 +19,8 @@
 .mapAndList {
     display: flex;
 }
+
+.highlighted {
+    color: red;
+    font-size: 24px;
+}
