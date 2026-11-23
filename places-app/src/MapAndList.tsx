@@ -37,6 +37,7 @@ const MapAndList = () => {
         } else {
           place.classList.remove('highlighted');
           alreadyHighlighted = '';
+          setHoveredId(null);
         }
       });
     }
