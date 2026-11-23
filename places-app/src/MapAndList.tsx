@@ -12,7 +12,7 @@ type Place = {
 
 const MapAndList = () => {
   const [places, setPlaces] = useState<Place[] > ([]);
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [clickedId, setclickedId] = useState<number | null>(null);
 
 
   useEffect(() => {
@@ -29,15 +29,15 @@ const MapAndList = () => {
     let alreadyHighlighted: string;
 
 
-    if (hoveredId !== null) {
+    if (clickedId !== null) {
       places.forEach(place => {
-        if ((place.id === hoveredId.toString() && place.id !== alreadyHighlighted)) {
+        if ((place.id === clickedId.toString() && place.id !== alreadyHighlighted)) {
           place.classList.add('highlighted');
           alreadyHighlighted = place.id;
         } else {
           place.classList.remove('highlighted');
           alreadyHighlighted = '';
-          setHoveredId(null);
+          setclickedId(null);
         }
       });
     }
@@ -51,8 +51,8 @@ const MapAndList = () => {
             {places.map(p => 
               <li
                 key={p.ID}
-                className={hoveredId === p.ID ? 'highlighted' : ''}
-                onClick={() => setHoveredId(p.ID)}>
+                className={clickedId === p.ID ? 'highlighted' : ''}
+                onClick={() => setclickedId(p.ID)}>
                 {p.Name} ({p.Latitude.toFixed(4)}, {p.Longitude.toFixed(4)});
               </li>
             )}
@@ -65,7 +65,7 @@ const MapAndList = () => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {places.map(p => 
-              <Marker key={p.ID} position={[p.Latitude, p.Longitude]} eventHandlers={{click: () => {setHoveredId(p.ID); highlightPlace();}}}>
+              <Marker key={p.ID} position={[p.Latitude, p.Longitude]} eventHandlers={{click: () => {setclickedId(p.ID); highlightPlace();}}}>
                 <Popup>
                   {p.Name}
                 </Popup>
