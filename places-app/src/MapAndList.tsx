@@ -59,7 +59,7 @@ const MapAndList = () => {
           </ul>
         </div>
         <div>
-          <MapContainer className='mapContainer' center={[62.5992, 29.7701]} zoom={13}>
+          <MapContainer className='mapContainer' center={[62.5992, 29.7701]} zoom={13} doubleClickZoom={false}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
