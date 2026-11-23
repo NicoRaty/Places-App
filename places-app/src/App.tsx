@@ -26,14 +26,18 @@ const App = () => {
 
   return (
     <>
-      <ul>
+    <div className='mapAndList'>
+      <div>
+      <ul className='placesList'>
         {places.map(p => 
           <li key = {p.ID}>
             {p.Name} ({p.Latitude.toFixed(4)}, {p.Longitude.toFixed(4)});
           </li>
         )}
       </ul>
-      <MapContainer style={{height: '400px'}} center={[62.5992, 29.7701]} zoom={17}>
+      </div>
+      <div>
+      <MapContainer className='mapContainer' center={[62.5992, 29.7701]} zoom={13}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -46,6 +50,8 @@ const App = () => {
           </Marker>
         )}
       </MapContainer>
+      </div>
+      </div>
     </>
   );
 };

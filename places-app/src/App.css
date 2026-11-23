@@ -4,5 +4,18 @@
 }
 
 .mapContainer {
-    align-items: right;
+    height: 50vh;
+    width: 50vw;
+}
+
+.placesList {
+    display: block;
+    overflow: scroll;
+    width: 50vw;
+    height: 50vh;
+    list-style-type: square;
+}
+
+.mapAndList {
+    display: flex;
 }
