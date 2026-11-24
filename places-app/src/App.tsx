@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import MapAndList from './MapAndList';
-import Header from './header';
-import LoginModal from './login';
-import RegisterModal from './register';
+import Header from './Header';
+import LoginModal from './Login';
+import RegisterModal from './Register';
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
