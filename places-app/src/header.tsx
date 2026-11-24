@@ -9,7 +9,6 @@ export interface HeaderProps {
   onSignupClick?: () => void;
 }
 
-
 export default function Header({
   appName = 'PlacesApp',
   appHref = '#home',

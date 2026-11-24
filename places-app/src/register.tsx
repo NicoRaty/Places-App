@@ -8,6 +8,29 @@ interface RegisterModalProps {
   onHide: () => void;
 }
 
+async function registerUser(userName: string, password: string) {
+  const response = await fetch('http://localhost:3000/api/users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name: userName, password }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Registration failed: ' + Error);
+  }
+
+  return response.json();
+}
+
+async function handleRegisterClick() {
+  const userNameInput = document.getElementById('registerUsername') as HTMLInputElement;
+  const passwordInput = document.getElementById('registerPassword') as HTMLInputElement;
+
+  await registerUser(userNameInput.value, passwordInput.value);
+}
+
 function RegisterModal({ show, onHide }: RegisterModalProps) {
   return (
     <Modal show={show} onHide={onHide}>
@@ -30,7 +53,7 @@ function RegisterModal({ show, onHide }: RegisterModalProps) {
         <Button variant="secondary" onClick={onHide}>
           Cancel
         </Button>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={() => {handleRegisterClick(); onHide();}}>
           Register
         </Button>
       </Modal.Footer>
