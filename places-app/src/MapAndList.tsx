@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -11,9 +11,9 @@ type Place = {
 };
 
 const MapAndList = () => {
-  const [places, setPlaces] = useState<Place[] > ([]);
+  const [places, setPlaces] = useState<Place[]>([]);
   const [clickedId, setclickedId] = useState<number | null>(null);
-
+  const markerRefs = useRef(new Map<number, L.Marker>());
 
   useEffect(() => {
     const getAllPlaces = async () => {
@@ -24,39 +24,36 @@ const MapAndList = () => {
     getAllPlaces();
   }, []);
 
-  function highlightPlace() {
-    const places = document.querySelectorAll('.placesList li');
-    let alreadyHighlighted: string;
-
-
-    if (clickedId !== null) {
-      places.forEach(place => {
-        if ((place.id === clickedId.toString() && place.id !== alreadyHighlighted)) {
-          place.classList.add('list-group-item active');
-          alreadyHighlighted = place.id;
-          //place.ariaCurrent = 'true';
-        } else {
-          place.classList.remove('list-group-item active');
-          alreadyHighlighted = '';
-          setclickedId(null);
-        }
-      });
+  useEffect(() => {
+    if (clickedId === null) return;
+    const marker = markerRefs.current.get(clickedId);
+    if (marker) {
+      marker.openPopup();
     }
-  }
+  }, [clickedId]);
+
+const setMarkerRef = (id: number) => (marker: L.Marker | null) => {
+    if (marker) {
+      markerRefs.current.set(id, marker);
+    } else {
+      markerRefs.current.delete(id);
+    }
+  };
 
   return (
     <>
       <div className='mapAndList'>
         <div>
           <ul className='list-group'>
-            {places.map(p => 
+            {places.map((p) => (
               <li
                 key={p.ID}
                 className={clickedId === p.ID ? 'list-group-item active' : 'list-group-item'}
-                onClick={() => setclickedId(p.ID)}>
+                onClick={() => setclickedId(p.ID)}
+              >
                 {p.Name} ({p.Latitude.toFixed(4)}, {p.Longitude.toFixed(4)});
               </li>
-            )}
+            ))}
           </ul>
         </div>
         <div>
@@ -65,13 +62,20 @@ const MapAndList = () => {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {places.map(p => 
-              <Marker key={p.ID} position={[p.Latitude, p.Longitude]} eventHandlers={{click: () => {setclickedId(p.ID); highlightPlace();}}}>
-                <Popup>
-                  {p.Name}
-                </Popup>
+            {places.map((p) => (
+              <Marker
+                key={p.ID}
+                ref={setMarkerRef(p.ID)}
+                position={[p.Latitude, p.Longitude]}
+                eventHandlers={{
+                  click: () => {
+                    setclickedId(p.ID);
+                  },
+                }}
+              >
+                <Popup>{p.Name}</Popup>
               </Marker>
-            )}
+            ))}
           </MapContainer>
         </div>
       </div>
