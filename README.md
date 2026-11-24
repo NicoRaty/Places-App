@@ -1,5 +1,17 @@
 # Places-App
 
+Places App is a React application project for the Frontend Development course.
+The app uses a Leaflet map element and a list of places stored in a local database to display restaurants and other points of interest in the Joensuu area.
+--------------------------
+Tech Stack:
+--------------------------
+Backend:
+- 
+
+Frontend:
+-
+
+
 Prerequisites:
 --------------------------
 1. Web Browser
