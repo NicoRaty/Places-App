@@ -9,6 +9,7 @@ export interface HeaderProps {
   onSignupClick?: () => void;
 }
 
+
 export default function Header({
   brandName = 'BrandName',
   brandHref = '#home',
