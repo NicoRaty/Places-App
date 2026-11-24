@@ -24,3 +24,8 @@
     color: red;
     font-size: 24px;
 }
+
+.list-group {
+    max-height: 50vh;
+    overflow-y: auto;
+}

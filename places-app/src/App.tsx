@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     <>
-      <Header brandName="PlacesApp" onLoginClick={() => setShowLogin(true)} onSignupClick={() => setShowRegister(true)} />
+      <Header appName="PlacesApp" appHref="#home" onLoginClick={() => setShowLogin(true)} onSignupClick={() => setShowRegister(true)} />
       <LoginModal show={showLogin} onHide={() => setShowLogin(false)} />
       <RegisterModal show={showRegister} onHide={() => setShowRegister(false)} />
       <MapAndList />

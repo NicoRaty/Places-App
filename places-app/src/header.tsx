@@ -3,23 +3,23 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
 export interface HeaderProps {
-  brandName?: string;
-  brandHref?: string;
+  appName?: string;
+  appHref?: string;
   onLoginClick?: () => void;
   onSignupClick?: () => void;
 }
 
 
 export default function Header({
-  brandName = 'BrandName',
-  brandHref = '#home',
+  appName = 'PlacesApp',
+  appHref = '#home',
   onLoginClick,
   onSignupClick,
 }: HeaderProps) {
   return (
     <Navbar expand="lg" bg="body-tertiary" sticky="top" className="border-bottom">
       <Container>
-        <Navbar.Brand href={brandHref}>{brandName}</Navbar.Brand>
+        <Navbar.Brand href={appHref}>{appName}</Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />
 
         <Navbar.Collapse id="main-navbar-nav" className="justify-content-end">
