@@ -32,10 +32,11 @@ const MapAndList = () => {
     if (clickedId !== null) {
       places.forEach(place => {
         if ((place.id === clickedId.toString() && place.id !== alreadyHighlighted)) {
-          place.classList.add('highlighted');
+          place.classList.add('list-group-item active');
           alreadyHighlighted = place.id;
+          //place.ariaCurrent = 'true';
         } else {
-          place.classList.remove('highlighted');
+          place.classList.remove('list-group-item active');
           alreadyHighlighted = '';
           setclickedId(null);
         }
@@ -47,11 +48,11 @@ const MapAndList = () => {
     <>
       <div className='mapAndList'>
         <div>
-          <ul className='placesList'>
+          <ul className='list-group'>
             {places.map(p => 
               <li
                 key={p.ID}
-                className={clickedId === p.ID ? 'highlighted' : ''}
+                className={clickedId === p.ID ? 'list-group-item active' : 'list-group-item'}
                 onClick={() => setclickedId(p.ID)}>
                 {p.Name} ({p.Latitude.toFixed(4)}, {p.Longitude.toFixed(4)});
               </li>
