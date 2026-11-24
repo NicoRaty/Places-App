@@ -8,7 +8,8 @@ interface RegisterModalProps {
   onHide: () => void;
 }
 
-async function registerUser(userName: string, password: string) {
+async function Register(userName: string, password: string) {
+
   const response = await fetch('http://localhost:3000/api/users', {
     method: 'POST',
     headers: {
@@ -18,17 +19,17 @@ async function registerUser(userName: string, password: string) {
   });
 
   if (!response.ok) {
-    throw new Error('Registration failed: ' + Error);
+    throw new Error('Registration failed');
   }
 
   return response.json();
 }
 
 async function handleRegisterClick() {
-  const userNameInput = document.getElementById('registerUsername') as HTMLInputElement;
+  const userNameInput = document.getElementById('Registername') as HTMLInputElement;
   const passwordInput = document.getElementById('registerPassword') as HTMLInputElement;
 
-  await registerUser(userNameInput.value, passwordInput.value);
+  await Register(userNameInput.value, passwordInput.value);
 }
 
 function RegisterModal({ show, onHide }: RegisterModalProps) {
@@ -39,7 +40,7 @@ function RegisterModal({ show, onHide }: RegisterModalProps) {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3" controlId="registerUsername">
+          <Form.Group className="mb-3" controlId="Registername">
             <Form.Label>Username</Form.Label>
             <Form.Control type="text" autoComplete="username" autoFocus />
           </Form.Group>

@@ -7,7 +7,7 @@ interface LoginModalProps {
   onHide: () => void;
 }
 
-async function loginUser(userName: string, password: string) {
+async function Login(userName: string, password: string) {
   const response = await fetch('http://localhost:3000/api/login', {
     method: 'POST',
     headers: {
@@ -25,10 +25,10 @@ async function loginUser(userName: string, password: string) {
 
 async function handleLoginCLick() {
 
-  const userNameInput = document.getElementById('loginUsername') as HTMLInputElement;
+  const userNameInput = document.getElementById('Loginname') as HTMLInputElement;
   const passwordInput = document.getElementById('loginPassword') as HTMLInputElement;
 
-  await loginUser(userNameInput.value, passwordInput.value);
+  await Login(userNameInput.value, passwordInput.value);
 }
 
 
@@ -41,7 +41,7 @@ function LoginModal({ show, onHide }: LoginModalProps) {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3" controlId="loginUsername">
+          <Form.Group className="mb-3" controlId="Loginname">
             <Form.Label>Username</Form.Label>
             <Form.Control type="text" autoComplete="username" autoFocus />
           </Form.Group>
