@@ -10,7 +10,7 @@ interface RegisterModalProps {
 
 async function Register(userName: string, password: string) {
 
-  const response = await fetch('http://localhost:3000/api/users', {
+  const response = await fetch(import.meta.env.API + '/users', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -54,7 +54,7 @@ const MapAndList = () => {
                 key={p.ID}
                 className={clickedId === p.ID ? 'list-group-item active' : 'list-group-item'}
                 onClick={() => setclickedId(p.ID)}>
-                {p.Name} ({p.Latitude.toFixed(4)}, {p.Longitude.toFixed(4)});
+                {p.Name} ({p.Latitude.toFixed(4)}, {p.Longitude.toFixed(4)})
               </li>
             )}
           </ul>
